@@ -27,6 +27,18 @@ export default function Home() {
         "Being overweight is a primary risk factor for type 2 diabetes.",
       color: "text-purple-500",
     },
+    {
+      icon: "🎂",
+      title: "Age Factor",
+      description: "Risk increases after age 45 due to metabolic changes.",
+      color: "text-orange-500",
+    },
+    {
+      icon: "🧪",
+      title: "High Blood Pressure",
+      description: "Hypertension is linked with insulin resistance.",
+      color: "text-yellow-600",
+    },
   ];
 
   return (
@@ -41,21 +53,22 @@ export default function Home() {
         measures.
       </p>
 
-      {/* Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl">
-        {riskFactors.map((factor, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition"
-          >
-            <div className={`text-3xl mb-3 ${factor.color}`}>{factor.icon}</div>
-            <h3 className="text-lg font-semibold text-gray-900">
-              {factor.title}
-            </h3>
-            <p className="text-gray-600 text-sm mt-2">{factor.description}</p>
-          </div>
-        ))}
-      </div>
+    {/* ✅ Grid layout: 3 cards per row and full width on desktop */}
+<div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  {riskFactors.map((factor, index) => (
+    <div
+      key={index}
+      className="bg-white rounded-xl shadow-sm border p-6 hover:shadow-md transition"
+    >
+      <div className={`text-3xl mb-3 ${factor.color}`}>{factor.icon}</div>
+      <h3 className="text-lg font-semibold text-gray-900">
+        {factor.title}
+      </h3>
+      <p className="text-gray-600 text-sm mt-2">{factor.description}</p>
+    </div>
+  ))}
+</div>
+
     </main>
   );
 }

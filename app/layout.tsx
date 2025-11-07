@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/nav";
-import Footer from "@/components/footer"; // ✅ Correct import
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico" },
 };
 
 export const viewport: Viewport = {
@@ -36,15 +34,17 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen w-full bg-white text-black font-sans antialiased",
+          "w-full bg-white text-black font-sans antialiased",
           fontSans.variable
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="relative flex flex-col min-h-screen">
+          {/* remove min-h-screen so the footer isn't forced to the very bottom */}
+          <div className="relative flex flex-col">
             <Navbar />
-            <main className="flex-grow">{children}</main>
-            <Footer />  {/* ✅ Now footer is added properly */}
+            {/* remove flex-grow so main doesn't push the footer down */}
+            <main>{children}</main>
+            <Footer />
           </div>
         </Providers>
       </body>
