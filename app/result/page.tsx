@@ -11,6 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import Link from "next/link";
+import { Button } from "@heroui/button";
 
 type ClinicalKeys =
   | "glucose"
@@ -102,19 +104,11 @@ export default function ResultPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Top bar like your template */}
       <div className="relative mx-4 mt-6 rounded-3xl border border-gray-200 bg-gradient-to-r from-blue-100 to-orange-100 py-4 px-6 text-[#003366]">
         <div className="flex items-center justify-between">
-          <div className="flex gap-9 font-semibold text-lg">
-            <button
-              onClick={() => router.push("/dashboard")}
-              className={`hover:underline ${pathname === "/dashboard" ? "text-orange-600" : ""}`}
-            >
-              Dashboard
-            </button>
-          </div>
+          <div className="flex gap-9 font-semibold text-lg"></div>
 
-          <h2 className="absolute left-1/2 -translate-x-1/2 text-xl font-bold bg-gradient-to-r from-blue-700 via-rose-600 to-purple-800 bg-clip-text text-transparent">
+          <h2 className="absolute left-1/2 -translate-x-1/2 text-xl font-bold bg-gradient-to-r from-blue-700 to-purple-800 bg-clip-text text-transparent">
             Your Health Overview
           </h2>
         </div>
@@ -158,8 +152,6 @@ export default function ResultPage() {
               className={`h-20 w-20 shrink-0 rounded-full text-white flex items-center justify-center text-2xl font-bold ${
                 isHighRisk ? "bg-red-500" : "bg-green-500"
               }`}
-              aria-label="Predicted probability"
-              title="Predicted probability"
             >
               {Math.round((prediction.probability ?? 0) * 100)}%
             </div>
@@ -207,7 +199,6 @@ export default function ResultPage() {
                   }}
                 />
                 <Legend />
-                {/* Keep labels simple to avoid TS mismatch with LabelList */}
                 <Bar
                   dataKey="actual"
                   fill="#3182ce"
@@ -221,7 +212,7 @@ export default function ResultPage() {
         </div>
 
         {/* Interpretation Table */}
-        <div className="mt-8 rounded-xl shadow bg-gradient-to-r from-blue-100 via-green-100 to-gray-100 p-6">
+        <div className="mt-8 rounded-xl shadow bg-gradient-to-r from-green-300 via-green-100 to-gray-100 p-6">
           <h4 className="text-md font-semibold mb-3">Interpretation Table</h4>
           <div className="overflow-hidden rounded-xl border border-gray-300 bg-white">
             <table className="min-w-full table-auto text-sm text-left">
@@ -251,27 +242,20 @@ export default function ResultPage() {
           </div>
         </div>
 
-        {/* Info Cards */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-600">
-            <h2 className="font-bold text-lg mb-2">What is Diabetes?</h2>
-            <p className="text-gray-700">
-              Diabetes is a chronic health condition that affects how your body
-              turns food into energy. With diabetes, your body either
-              doesn&apos;t make enough insulin or can&apos;t use it properly.
-            </p>
-          </div>
-          <div className="bg-white rounded-xl shadow-md p-6 border-t-4 border-green-600">
-            <h2 className="font-bold text-lg mb-2">
-              About Our Prediction Model
-            </h2>
-            <p className="text-gray-700">
-              Our model predicts diabetes risk by converting lifestyle data into
-              clinical insights. It is intended for awareness and early
-              self-assessment, not a medical diagnosis.
-            </p>
-          </div>
+        {/* Start New Assessment Button */}
+
+        <div className="mt-10 mb-8 flex flex-col items-center">
+          <Link href={"/question"}>
+            <Button className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-white text-lg font-semibold shadow-xl hover:from-blue-700 hover:to-indigo-700 transition">
+              🔁 Start New Assessment
+            </Button>
+          </Link>
+          <p className="mt-3 text-sm text-gray-600 max-w-xl text-center">
+            Begin a fresh assessment to check your health status again with
+            updated data.
+          </p>
         </div>
+        {/* </Link> */}
       </main>
     </div>
   );

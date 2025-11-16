@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { Button } from "@heroui/button";
 
 const HealthyLifestyle = () => {
   return (
     <div className="bg-gray-200">
       {/* Hero Section */}
       <section className="relative bg-[url('/image.png')] bg-cover bg-center bg-no-repeat bg-fixed">
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent pointer-events-none" />
         <div className="relative max-w-7xl px-6 py-24">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-900">
             Live a Healthy Lifestyle
@@ -109,7 +111,7 @@ const HealthyLifestyle = () => {
             <h3 className="text-xl font-semibold text-red-600">
               🩺 Regular Checkups
             </h3>
-           <ul className="mt-4 text-slate-700 space-y-2 list-disc list-outside pl-4">
+            <ul className="mt-4 text-slate-700 space-y-2 list-disc list-outside pl-4">
               <li>Monitor blood sugar levels regularly.</li>
               <li>Check blood pressure and cholesterol.</li>
               <li>Visit your doctor every 6–12 months.</li>
@@ -117,16 +119,24 @@ const HealthyLifestyle = () => {
           </motion.div>
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button (HeroUI + Motion + Link) */}
         <div className="text-center mt-16">
-          <motion.a
-            href="/predict"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-blue-600 text-white rounded-full font-medium shadow-lg hover:shadow-2xl"
-          >
-            🔍 Check Your Diabetes Risk
-          </motion.a>
+          <Link href="/question">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
+            >
+              <Button
+                color="primary"
+                radius="full"
+                size="lg"
+                className="px-8 py-6 text-white font-medium shadow-lg hover:shadow-2xl"
+              >
+                🔍 Check Your Diabetes Risk
+              </Button>
+            </motion.div>
+          </Link>
         </div>
       </section>
     </div>
