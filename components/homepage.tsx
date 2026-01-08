@@ -8,7 +8,7 @@ export default function Homepage() {
   return (
     <div className="bg-gray-200">
       <div className="relative bg-[url('/backj.png')] bg-cover bg-center bg-no-repeat bg-fixed">
-        {/* Make overlay non-interactive so links/buttons underneath are clickable */}
+        
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent pointer-events-none" />
 
         <div className="relative max-w-7xl px-6 py-28 flex">

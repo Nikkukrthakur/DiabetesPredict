@@ -159,7 +159,6 @@ export default function QuizPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  // optional: tiny local mock if API not set yet
   const mockPredict = (data: Answers) => {
     const risky = ["High sugar/junk food", "Daily", "8-10", "10+"];
     const riskScore =
@@ -213,7 +212,6 @@ export default function QuizPage() {
         }
         data = await res.json();
       } else {
-        // fallback mock
         data = mockPredict(answers);
       }
 
@@ -257,7 +255,6 @@ export default function QuizPage() {
           onSubmit={onSubmit}
           className="space-y-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"
         >
-          {/* Two columns with extra gap between them */}
           <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 gap-x-32">
             {visibleQuestions.map((q) => {
               const isAge = q.id === "age";

@@ -10,10 +10,10 @@ from .mapping import map_quiz_to_clinical, CLINICAL_KEYS
 
 app = FastAPI(title="Diabetes Risk API")
 
-# Allow local dev from Next.js
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten in prod
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,11 +42,11 @@ def _load_artifacts():
 try:
     model, scaler = _load_artifacts()
 except Exception as e:
-    # Surface load errors on startup
+   
     print("Artifact load error:", e)
 
 class QuizAnswers(BaseModel):
-    # Must match your quiz IDs (all strings from the UI)
+  
     smoking: str
     alcohol: str
     exercise: str
@@ -89,22 +89,22 @@ def predict(answers: QuizAnswers):
     try:
         Xs = scaler.transform(X)
     except Exception:
-        # If your scaler isn't compatible, try without scaling:
+        
         Xs = X
 
-    # Compatible with sklearn classifiers exposing predict_proba / decision_function
+    
     proba = None
     try:
         proba = float(model.predict_proba(Xs)[0, 1])
     except Exception:
         try:
             decision = float(model.decision_function(Xs)[0])
-            # squish to (0,1)
+           
             proba = float(1/(1+np.exp(-decision)))
         except Exception:
-            # last resort
+           
             proba = float(model.predict(Xs)[0])
-            # normalize rough prob
+           
             if proba > 1:
                 proba = 1.0
             elif proba < 0:

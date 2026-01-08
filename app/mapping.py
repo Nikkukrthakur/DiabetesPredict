@@ -1,7 +1,6 @@
 from typing import Dict
 
-# The order your model most likely expects (Pima-style):
-# Adjust if your pickle was trained on a different order.
+
 CLINICAL_KEYS = [
     "Pregnancies",
     "Glucose",
@@ -71,7 +70,7 @@ def map_quiz_to_clinical(answers: Dict[str, str]) -> Dict[str, float]:
     }, 2)
 
     fruitveg = midpoints(answers.get("fruitVeg", "Few times/week"), {
-        # servings per week (rough)
+       
         "Never": 0, "Rarely": 1, "Few times/week": 3, "Daily": 7
     }, 3)
 
@@ -81,8 +80,7 @@ def map_quiz_to_clinical(answers: Dict[str, str]) -> Dict[str, float]:
 
     female = 1.0 if gender == "Female" else 0.0
 
-    # ---- Heuristic clinical estimations ----
-    # These are *estimates* purely from lifestyle; fine-tune for your dataset.
+
     glucose = 90 \
         + 0.8 * sugar_freq \
         + 0.6 * fam_hist \
